@@ -1,0 +1,50 @@
+{
+  "index": "{{index}}",
+  "scroll": "30s",
+  "search_type": "scan",
+  "size" : {{ fetchsize }},
+  "body":{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "range": {
+            "@timestamp": {
+              "gt": "{{from}}",
+              "to": "now"
+            }
+          }
+        }
+      ],
+"must_not": [
+{
+"constant_score": {
+"filter": {
+"missing": {
+"field": "message"
+}
+}
+}
+}
+,
+{
+"constant_score": {
+"filter": {
+"missing": {
+"field": "@timestamp"
+}
+}
+}
+}
+],
+      "should": []
+    }
+  },
+	  "sort": {
+    "@timestamp": {
+      "order": "asc"
+    }
+  }
+}
+}
+
