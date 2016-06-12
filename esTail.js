@@ -49,11 +49,10 @@ var context = {
     from:"now-10m",
     fetchsize: 100
 }
-function defaultOutput(output){
+var callbackOutput = function (output){
 	console.log(output)
 }
 function printOutput(out){
-	if ( typeof out === "undefined" ) out = defaultOutput
 	//s.sort(function ( a, b){
 	//	  a1 = moment(a._source["@timestamp"],"YYYY-MM-DDTHH:mm:ss.SSSZ").format("x");
 	//	  b1 = moment(b._source["@timestamp"],"YYYY-MM-DDTHH:mm:ss.SSSZ").format("x");
@@ -66,16 +65,16 @@ function printOutput(out){
 		console.info("===="+hit+" of "+output.length);
 		// If allfields cli option is set show all the fields not just one field
 		if ( allfields ) {
-			out(hit._source["@timestamp"].red+":\n".green+JSON.stringify(hit._source));
+			callbackOutput(hit._source["@timestamp"].red+":\n".green+JSON.stringify(hit._source));
 
 		}else{
 			// If not allfields 
 			// If rawoutput is set Pretty Print the json as output
 			if (rawoutput) {
-				out(JSON.stringify(hit,null,2));
+				callbackOutput(JSON.stringify(hit,null,2));
 			}else{
 				//If not rawoutput print <indexed time>: <index>:message
-				out(hit._source["@timestamp"].red+": ".green+hit._index.green+":".green+hit._source.message)
+				callbackOutput(hit._source["@timestamp"].red+": ".green+hit._index.green+":".green+hit._source.message)
 			}
 
 		}
@@ -83,7 +82,7 @@ function printOutput(out){
 		if ( regex ) {
 			var result = hit._source.message.match(regex);
 			if ( result  ){
-				out("\tregex: ".red+JSON.stringify(result).yellow);	
+				callbackOutput("\tregex: ".red+JSON.stringify(result).yellow);	
 			}
 		}
 		// Set the time of the last message timestamp retrieved so we don't requery the same message
