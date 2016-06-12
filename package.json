@@ -1,6 +1,6 @@
 {
   "name": "estail",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "ElasticSearch Tail",
   "main": "esTail.js",
   "scripts": {

@@ -1,3 +1,16 @@
+# WARNING
+I am currently porting esTail to be a Module  rather then application.  
+
+use release 0.8.0 until finished and tested https://github.com/ElasticSearchCLITools/esTail/tree/0.8.0   if you want a working version
+
+Example
+```
+
+estail = require('./esTail')
+
+estail.estail();
+
+```
 # esTail
 ElasticSearch CLI Tail - This application simulate the tail command against a index which has a @timestamp
 
