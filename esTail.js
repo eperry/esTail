@@ -129,6 +129,7 @@ function doSearch(client,searchTemplate){
 	  }, ph);
 	});
 }
+
 module.exports = {
 init: function() {
 	/***************************************************
@@ -217,7 +218,8 @@ init: function() {
 	    }
 	});
 },
-estail: function() {
+estail: function(outCallBack) {
+if (typeof outCallBack !== "undefined" ) callbackOutput = outCallBack;
 // Convert CLI options to an actual regex expression and set the regex output to be displayed
 regex = new RegExp( regex,regexflags);
 // Load the defaultSearch
